@@ -7,9 +7,9 @@ cd $BASE_PATH_SCRIPT
 # load configuration from external file
 source backup.conf
 
-# this database does not need to be backuped, because it only contains several meta data
+# this database does not need to be backuped, because it only contains several meta data, same for database "sys"
 # see https://dev.mysql.com/doc/refman/5.5/en/information-schema.html
-ignoreDatabases=['information_schema']
+ignoreDatabases=['information_schema,sys']
 
 # connect to mysql server (from connection details found in database.conf)
 # and show all databases to put them into a string
