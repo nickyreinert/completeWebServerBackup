@@ -1,6 +1,5 @@
 #!/bin/bash
 # get to current script base path
-# thanks to https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
 BASE_PATH_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd $BASE_PATH_SCRIPT
 
@@ -15,7 +14,6 @@ ignoreDatabases=['information_schema,sys,performance_schema']
 # and show all databases to put them into a string
 databasesString=$(mysql --defaults-extra-file=database.conf -Bse 'show databases')
 # as the upper line only returns a string, we need to explode it to an array
-# thanks to Dennis Williamson @ https://stackoverflow.com/a/31405855/2360229
 databasesArray=($(echo "$databasesString" | tr ',' ' '))
 
 # loop through list of available databases
