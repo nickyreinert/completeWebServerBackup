@@ -43,14 +43,14 @@ else
         fi
 
         # first use duplicity to create backup and put it to local file system
-        duplicity --full-if-older-than 1M --encrypt-key $GPG_PUB_KEY $srcFolder file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
-        duplicity remove-older-than 12M --encrypt-key $GPG_PUB_KEY --force file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
-        duplicity remove-all-inc-of-but-n-full 1 --encrypt-key $GPG_PUB_KEY --force file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
+        duplicity --full-if-older-than 1M --archive-dir=$BASE_PATH_TEMP --encrypt-key $GPG_PUB_KEY $srcFolder file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
+        duplicity remove-older-than 12M --archive-dir=$BASE_PATH_TEMP --encrypt-key $GPG_PUB_KEY --force file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
+        duplicity remove-all-inc-of-but-n-full 1 --encrypt-key $GPG_PUB_KEY --archive-dir=$BASE_PATH_TEMP --force file://$dstFolder --no-print-statistics --verbosity=$DUPLICITY_VERBOSITY
 
         # second use duplicity to create backup and put it to remote destination, in this case webdav folder
-        duplicity --full-if-older-than 1M --encrypt-key $GPG_PUB_KEY $srcFolder webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
-        duplicity remove-older-than 12M --encrypt-key $GPG_PUB_KEY --force  webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
-        duplicity remove-all-inc-of-but-n-full 1 --encrypt-key $GPG_PUB_KEY --force  webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
+        duplicity --full-if-older-than 1M --encrypt-key $GPG_PUB_KEY --archive-dir=$BASE_PATH_TEMP $srcFolder webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
+        duplicity remove-older-than 12M --encrypt-key $GPG_PUB_KEY --archive-dir=$BASE_PATH_TEMP --force  webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
+        duplicity remove-all-inc-of-but-n-full 1 --encrypt-key $GPG_PUB_KEY --archive-dir=$BASE_PATH_TEMP --force  webdavs://$WEBDAV_USER:$WEBDAV_PASSWORD@$WEBDAV_URL/$dstFolder --no-print-statistics --ssl-no-check-certificate --verbosity=$DUPLICITY_VERBOSITY
 
 fi
 
