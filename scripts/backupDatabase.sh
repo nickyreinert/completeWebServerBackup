@@ -38,6 +38,9 @@ do
                 # call the actual backup script and give the path to the mysql dump
                 ./backupFilesystem.sh -f ${BASE_PATH_TEMP}${database}.sql -d "${BASE_PATH_BACKUP}databases/${database}"
 
+                # of course remove the temporary sql dump
+                rm ${BASE_PATH_TEMP}${database}.sql
+        
         fi
 
 done
